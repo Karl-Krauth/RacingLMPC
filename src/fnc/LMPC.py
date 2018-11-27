@@ -12,6 +12,7 @@ from Utilities import Curvature
 from numpy import hstack, inf, ones
 from scipy.sparse import vstack
 from osqp import OSQP
+import pickle
 
 from abc import ABCMeta, abstractmethod
 # import sys
@@ -100,7 +101,32 @@ class AbstractControllerLMPC:
         # Get the matrices for defining the QP
         # this method will be defined in inheriting classes
         L, G, E, M, q, F, b = self._getQP(x0)
-        
+        """
+        with open("./data/M.obj", "wb") as f:
+            print(M)
+            pickle.dump(M, f)
+
+        with open("./data/q.obj", "wb") as f:
+            print(q)
+            pickle.dump(q, f)
+
+        with open("./data/F.obj", "wb") as f:
+            print(F)
+            pickle.dump(F, f)
+
+        with open("./data/b.obj", "wb") as f:
+            print(b)
+            pickle.dump(b, f)
+
+        with open("./data/G.obj", "wb") as f:
+            print(G)
+            pickle.dump(G, f)
+
+        with open("./data/l.obj", "wb") as f:
+            l = np.dot(E, x0) + L[:, 0]
+            pickle.dump(l, f)
+        """
+
         # Solve QP
         startTimer = datetime.datetime.now()
         if self.Solver == "CVX":
