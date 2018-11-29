@@ -1,0 +1,6 @@
+cvxopt
+matplotlib
+numpy
+osqp
+pathos
+scipy
